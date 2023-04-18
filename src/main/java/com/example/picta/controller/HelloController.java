@@ -18,25 +18,14 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
-    private ArrayList<Sequential> seqList = new ArrayList<Sequential>();
-    Sequential seq = new Sequential("aa","aa");
-
-    @FXML
-    private TilePane mainTilePane;
-
-
-    @FXML
-    private TextField mainSearchBar;
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         //test
         String[] cars = {"Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW", "Ford","Volvo", "BMW",};
-        for (String name : cars) {
-            seqList.add(new Sequential(name, "aaa"));
-        }
+        //for (String name : cars) {
+         //   seqList.add(new Sequential(name, "aaa"));
+        //}
 
 
         for (Sequential seq : seqList){
@@ -63,4 +52,14 @@ public class HelloController implements Initializable {
 
         }
     }
+    private ArrayList<Sequential> seqList;
+
+    @FXML
+    private TilePane mainTilePane;
+
+
+    @FXML
+    private TextField mainSearchBar;
 }
+
+
