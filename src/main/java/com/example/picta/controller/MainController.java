@@ -4,7 +4,6 @@ import com.example.picta.MainApplication;
 import com.example.picta.model.BinaryWriter;
 import com.example.picta.model.Sequential;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
-public class HelloController implements Initializable {
+public class MainController implements Initializable {
     private Button SelectedButton = null;
     private ArrayList<Sequential> seqList = new ArrayList<>();
     private MainApplication mainApplication;

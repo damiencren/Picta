@@ -1,15 +1,17 @@
 package com.example.picta;
 
 import com.example.picta.controller.CreationController;
-import com.example.picta.controller.HelloController;
+import com.example.picta.controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+
 
 public class MainApplication extends Application {
 
@@ -18,11 +20,12 @@ public class MainApplication extends Application {
     private Scene firstScene;
     private Scene secondScene;
 
-    private HelloController helloController;
+    private MainController helloController;
 
     @Override
     public void start(Stage stage) throws IOException{
         this.stage = stage;
+        stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("book.png"))));
         FXMLLoader firstFxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
         Scene firstScene = new Scene(firstFxmlLoader.load(),1280,720);
         this.helloController = firstFxmlLoader.getController();
@@ -54,6 +57,7 @@ public class MainApplication extends Application {
         secondStage.initModality(Modality.APPLICATION_MODAL);
         secondStage.setResizable(false);
         secondStage.show();
+        secondStage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("plus.png"))));
         this.secondStage = secondStage;
     }
 
@@ -64,7 +68,7 @@ public class MainApplication extends Application {
         return secondStage;
     }
 
-    public HelloController getHelloController() {
+    public MainController getHelloController() {
         return helloController;
     }
 }
