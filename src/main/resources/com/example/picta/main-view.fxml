@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.picta.controller.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onClick" prefHeight="360.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.picta.controller.HelloController">
    <top>
       <HBox alignment="CENTER" prefHeight="32.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -22,7 +21,7 @@
                   <Insets />
                </HBox.margin>
             </TextField>
-            <Button alignment="CENTER" maxWidth="150.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="110.0" text="Filtrer" HBox.hgrow="NEVER">
+            <Button alignment="CENTER" maxWidth="150.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Filtrer" HBox.hgrow="NEVER">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
@@ -50,13 +49,16 @@
    <bottom>
       <ButtonBar prefHeight="44.0" prefWidth="640.0" BorderPane.alignment="CENTER">
          <buttons>
-            <Button mnemonicParsing="false" text="Créer" />
-            <Button mnemonicParsing="false" text="Editer" />
-            <Button mnemonicParsing="false" text="Supprimer" textFill="#f20000" />
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCreateBtnClicked" text="Créer" />
+            <Button fx:id="editBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onEditBtnClicked" text="Editer" />
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDeleteBtnClicked" text="Supprimer" textFill="#f20000" />
          </buttons>
          <BorderPane.margin>
-            <Insets right="10.0" />
+            <Insets />
          </BorderPane.margin>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
       </ButtonBar>
    </bottom>
 </BorderPane>

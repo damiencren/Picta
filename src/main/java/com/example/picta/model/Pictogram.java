@@ -1,6 +1,6 @@
 package com.example.picta.model;
 
-class Pictogram {
+public class Pictogram {
     public String id;
     public String url;
 
