@@ -3,8 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.damiencren.picta.controller.EditionController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="1280.0" spacing="10.0" BorderPane.alignment="CENTER">
@@ -22,7 +21,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <children>
-            <Label fx:id="lbSeqName" prefHeight="18.0" prefWidth="41.0" text="Name" HBox.hgrow="ALWAYS">
+            <Label fx:id="lbSeqName" text="Name" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -36,19 +35,28 @@
          <children>
             <ScrollPane fitToWidth="true" prefHeight="410.0" prefWidth="1010.0">
                <content>
-                  <TilePane fx:id="seqTilePane" hgap="10.0" prefHeight="378.0" prefWidth="1009.0" vgap="10.0">
+                  <TilePane fx:id="seqTilePane" hgap="10.0" prefHeight="345.0" prefWidth="1009.0" vgap="10.0">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </TilePane>
                </content>
             </ScrollPane>
-            <HBox prefHeight="26.0" prefWidth="546.0" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="1010.0" spacing="10.0">
                <children>
-                  <TextField fx:id="searchTextField" prefHeight="26.0" prefWidth="291.0" promptText="Rechercher un séquentiel" />
-                  <TextField fx:id="limitTextField" prefHeight="26.0" prefWidth="74.0" promptText="Taille" />
-                  <Button mnemonicParsing="false" onAction="#onSearchByNameBtnClicked" text="Par nom" />
-                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Catégorie" />
+                  <TextField fx:id="searchTextField" prefHeight="26.0" prefWidth="291.0" promptText="Entrer votre recherche" />
+                  <TextField fx:id="limitTextField" prefHeight="26.0" prefWidth="74.0" promptText="Nombre" text="5" />
+                  <Button minWidth="70.0" mnemonicParsing="false" onAction="#onSearchByNameBtnClicked" prefHeight="26.0" prefWidth="70.0" text="Chercher" />
+                  <Label minWidth="75.0" prefHeight="18.0" prefWidth="75.0" text="Catégories : " />
+                  <ScrollPane fitToHeight="true">
+                     <content>
+                        <HBox fx:id="categoryHBox" spacing="10.0">
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </HBox>
+                     </content>
+                  </ScrollPane>
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -77,21 +85,28 @@
             <Label text="Nom" />
             <HBox prefHeight="1.0" prefWidth="250.0" spacing="10.0">
                <children>
-                  <TextField fx:id="tfName" promptText="Nom du séquentiel" />
+                  <TextField fx:id="tfName" promptText="Nouveau nom" />
                   <Button mnemonicParsing="false" onAction="#onModifyNameBtnClicked" text="🖌" />
                </children>
             </HBox>
             <Label text="Description" />
-            <HBox prefHeight="15.0" prefWidth="250.0" spacing="10.0">
+            <HBox prefHeight="21.0" prefWidth="250.0" spacing="10.0">
                <children>
-                  <TextField fx:id="tfDescription" promptText="Description du séquentiel" />
+                  <TextField fx:id="tfDescription" prefHeight="122.0" prefWidth="150.0" promptText="Nouvelle description" />
                   <Button mnemonicParsing="false" onAction="#onModifyDescriptionBtnClicked" text="🖌" />
                </children>
             </HBox>
             <Label text="Couleur" />
             <ColorPicker fx:id="seqColorPicker" />
+            <Label text="Orientation" />
+            <HBox prefHeight="14.0" prefWidth="250.0" spacing="10.0">
+               <children>
+                  <RadioButton fx:id="radioBtnH" mnemonicParsing="false" onAction="#radioBtnHClicked" selected="true" text="Horizontale" />
+                  <RadioButton fx:id="radioBtnV" mnemonicParsing="false" onAction="#radioBtnVClicked" text="Verticale" />
+               </children>
+            </HBox>
             <Separator prefWidth="200.0" />
-            <VBox prefHeight="122.0" prefWidth="250.0" spacing="5.0">
+            <VBox fx:id="picVBox" prefHeight="122.0" prefWidth="250.0" spacing="5.0">
                <children>
                   <Label text="Pictogramme">
                      <font>
@@ -99,7 +114,7 @@
                      </font>
                   </Label>
                   <Label fx:id="lbIdPicto" text="Id : " />
-                  <Hyperlink fx:id="hyperlinkPicto" text="Image Link" />
+                  <Label fx:id="lbUrlPicto" text="URL : " />
                   <Button mnemonicParsing="false" onAction="#pictoDelBtnClcked" text="Supprimer" />
                </children>
             </VBox>

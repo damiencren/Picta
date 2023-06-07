@@ -1,29 +1,34 @@
 package fr.damiencren.picta.controller;
 
 import fr.damiencren.picta.MainApplication;
-import fr.damiencren.picta.model.BinaryWriter;
-import fr.damiencren.picta.model.Pictogram;
-import fr.damiencren.picta.model.PictogramManager;
-import fr.damiencren.picta.model.Sequential;
+import fr.damiencren.picta.model.*;
 import fr.damiencren.picta.utils.NumberUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.VBox;
 
 import javax.imageio.plugins.bmp.BMPImageWriteParam;
 
@@ -46,10 +51,22 @@ public class EditionController implements Initializable {
     private Label lbSeqName;
 
     @FXML
+    private RadioButton radioBtnH;
+
+    @FXML
+    private RadioButton radioBtnV;
+
+    @FXML
+    private VBox picVBox;
+
+    @FXML
     private Label lbError;
 
     @FXML
-    private Hyperlink hyperlinkPicto;
+    private Label lbUrlPicto;
+
+    @FXML
+    private HBox categoryHBox;
 
     @FXML
     private Label lbIdPicto;
@@ -140,8 +157,10 @@ public class EditionController implements Initializable {
         refresh();
     }
     public void refresh(){
+        picVBox.setVisible(false);
         seqTilePane.getChildren().clear();
         if (seq != null) {
+            seqTilePane.setStyle("-fx-border-color: "+ seq.getColor().getRGBA() + "; -fx-border-width: 2px;");
             for (Pictogram picto : seq.getPictoList()) {
                 Image image = new Image(picto.getUrl());
                 ImageView view = new ImageView(image);
@@ -156,7 +175,10 @@ public class EditionController implements Initializable {
                     ColorAdjust highlightEffect = new ColorAdjust();
                     highlightEffect.setBrightness(0.7);
                     selectedImage.setEffect(highlightEffect);
-                    System.out.println("Un bouton a été modifié");
+
+                    lbIdPicto.setText("Id : " +picto.getID());
+                    lbUrlPicto.setText("URL : "+picto.getUrl());
+                    picVBox.setVisible(true);
                 });
                 seqTilePane.getChildren().add(view);
             }
@@ -168,6 +190,17 @@ public class EditionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ArrayList<String> categories = new ArrayList<>(Arrays.asList("Alimentation", "Loisirs", "Lieu", "Education", "Temps", "Mobilité", "Religion", "Travail", "Santé", "Communication", "Objet"));
+        for (String category : categories){
+            Button btn = new Button(category);
+            btn.setOnAction(event -> {
+                searchTextField.setText(category);
+                onSearchByNameBtnClicked(event);
+                refresh();
+            });
+            categoryHBox.getChildren().add(btn);
+        }
+
         seqTilePane.setOnDragOver(event -> {
             if (event.getGestureSource() != seqTilePane && event.getDragboard().hasString()) {
                 event.acceptTransferModes(TransferMode.COPY);
@@ -193,7 +226,7 @@ public class EditionController implements Initializable {
 
     @FXML
     void leaveBtnClicked(ActionEvent event) {
-
+        mainApplication.showMainView();
     }
 
     @FXML
@@ -218,4 +251,24 @@ public class EditionController implements Initializable {
             selectedImage = null;
         }
     }
+
+
+    @FXML
+    void radioBtnHClicked(ActionEvent event) {
+        seqTilePane.setOrientation(Orientation.HORIZONTAL);
+        radioBtnH.setSelected(true);
+        radioBtnV.setSelected(false);
+        refresh();
+    }
+
+    @FXML
+    void radioBtnVClicked(ActionEvent event) {
+        seqTilePane.setOrientation(Orientation.VERTICAL);
+        radioBtnH.setSelected(false);
+        radioBtnV.setSelected(true);
+
+        refresh();
+    }
+
+
 }

@@ -53,6 +53,10 @@ public class Sequential implements Serializable {
         return image;
     }
 
+    public byte[] getImage(byte[] image) {
+        return image;
+    }
+
     public void delWithId(String id){
         for (Pictogram picto : pictoList){
             if (picto.getID().equals(id)){
@@ -71,5 +75,9 @@ public class Sequential implements Serializable {
 
     public void setColor(Color color){
         seriColor = new SerializableColor(color);
+    }
+
+    public SerializableColor getColor() {
+        return seriColor;
     }
 }

@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="298.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.damiencren.picta.controller.CreationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="298.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.damiencren.picta.controller.CreationController">
    <center>
-      <VBox prefHeight="200.0" prefWidth="298.0" spacing="5.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="298.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Nom*" />
             <TextField fx:id="nameTextField" promptText="Nom du séquentiel" />

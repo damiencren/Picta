@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 
 import java.io.*;
 import java.net.URL;
@@ -19,6 +20,9 @@ import java.util.*;
 public class MainController implements Initializable {
     @FXML
     private Label errorLabel;
+
+    @FXML
+    private Button duplicateBtn;
     private Button SelectedButton = null;
     private ArrayList<Sequential> seqList = new ArrayList<>();
     private MainApplication mainApplication;
@@ -72,6 +76,22 @@ public class MainController implements Initializable {
         mainApplication.showCreationScene();
     }
 
+
+    @FXML
+    void onDuplicateBtnClicked(ActionEvent event) {
+        if (SelectedButton != null){
+            UUID id = (UUID) SelectedButton.getUserData();
+            for (Sequential seq :seqList) {
+                if (seq.getId().equals(id)){
+                    UUID new_id = UUID.randomUUID();
+                    Sequential newSeq = new Sequential(new_id,seq.getName(), seq.getDescription(), seq.getImage(), seq.getColor());
+                    seqList.add(newSeq);
+                    break;
+                }
+            }
+            refresh();
+        }
+    }
 
     @FXML
     void onClick(MouseEvent event) {

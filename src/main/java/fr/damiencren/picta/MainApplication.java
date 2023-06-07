@@ -34,9 +34,6 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException{
 
-        double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
-        double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
-
         this.stage = stage;
         stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("book.png"))));
         FXMLLoader firstFxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
@@ -47,7 +44,7 @@ public class MainApplication extends Application {
         this.firstScene = firstScene;
 
         FXMLLoader secondFxmlLoader = new FXMLLoader(MainApplication.class.getResource("creation-view.fxml"));
-        Scene secondScene = new Scene(secondFxmlLoader.load(), 350, 460);
+        Scene secondScene = new Scene(secondFxmlLoader.load(), 350, 500);
         CreationController creationController = secondFxmlLoader.getController();
         this.creationController = creationController;
         creationController.setMainApplication(this);
@@ -55,7 +52,7 @@ public class MainApplication extends Application {
         this.secondScene = secondScene;
 
         FXMLLoader editionFxmlLoader = new FXMLLoader(MainApplication.class.getResource("edition-view.fxml"));
-        Scene editionScene  = new Scene(editionFxmlLoader.load(),screenWidth,screenHeight);
+        Scene editionScene  = new Scene(editionFxmlLoader.load(),1280, 720);
         EditionController editionController = editionFxmlLoader.getController();
         this.editionController = editionController;
         editionController.setMainApplication(this);
@@ -106,5 +103,12 @@ public class MainApplication extends Application {
         return helloController;
     }
 
+    public void showMainView() {
+        stage.setTitle("Picta");
+        stage.setScene(firstScene);
+        stage.setMaximized(false);
+        stage.setMaximized(true);
+        stage.show();
+    }
 }
 
