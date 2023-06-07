@@ -1,6 +1,6 @@
-package com.example.picta.model;
+package fr.damiencren.picta.model;
 
-public class Pictogram {
+public class Pictogram implements java.io.Serializable{
     public String id;
     public String url;
 

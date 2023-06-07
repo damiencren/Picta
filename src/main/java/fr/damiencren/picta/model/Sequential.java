@@ -1,31 +1,27 @@
-package com.example.picta.model;
+package fr.damiencren.picta.model;
 
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.UUID;
 
 public class Sequential implements Serializable {
-
-    final private static String DEFAULT_IMAGE_PATH = "src/main/resources/com/example/picta/default.png";
     private UUID id;
     private String name;
     private String description;
-    private String imagePath;
+    private byte[] image;
+    private SerializableColor seriColor;
     private ArrayList<Pictogram> pictoList;
 
-    public Sequential(UUID id, String name, String des, String imagePath){
+    public Sequential(UUID id, String name, String des, byte[] image, SerializableColor seriColor){
         this.id = id;
         this.name = name;
         this.description = des;
-        this.imagePath = imagePath;
+        this.image = image;
+        this.seriColor = seriColor;
         this.pictoList = new ArrayList<>();
-    }
-
-    public Sequential(UUID id, String name, String des){
-        this(id, name, des, DEFAULT_IMAGE_PATH);
     }
 
     public String getName() {
@@ -48,7 +44,7 @@ public class Sequential implements Serializable {
         return id;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public byte[] getImage() {
+        return image;
     }
 }

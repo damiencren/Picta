@@ -1,8 +1,8 @@
-package com.example.picta.controller;
+package fr.damiencren.picta.controller;
 
-import com.example.picta.MainApplication;
-import com.example.picta.model.BinaryWriter;
-import com.example.picta.model.Sequential;
+import fr.damiencren.picta.MainApplication;
+import fr.damiencren.picta.model.BinaryWriter;
+import fr.damiencren.picta.model.Sequential;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,21 +44,14 @@ public class MainController implements Initializable {
     public void refresh(){
         mainTilePane.getChildren().clear();
         for (Sequential seq : seqList){
+            Image image = new Image(new ByteArrayInputStream(seq.getImage()));
+            ImageView view = new ImageView(image);
 
-            InputStream inputstream = null;
-            try {
-                inputstream = new FileInputStream(seq.getImagePath()); //In(seq.getImagePath()).openStream();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            Image img = new Image(inputstream);
-            ImageView view = new ImageView(img);
-
-            view.setFitHeight(200);
+            view.setFitHeight(190);
             view.setPreserveRatio(true);
 
             Button btn = new Button(seq.getName(), view);
+            btn.setStyle("-fx-font-size: 15px;");
             btn.setPrefSize(240,240);
             btn.setGraphic(view);
             btn.setContentDisplay(ContentDisplay.TOP);
@@ -67,6 +60,17 @@ public class MainController implements Initializable {
             mainTilePane.getChildren().add(btn);
         }
         editBtn.setDisable(mainTilePane.getChildren().size()==0||SelectedButton==null);
+        
+        Button Addbtn = new Button("+");
+        Addbtn.setStyle("-fx-font-size: 50px;");
+        Addbtn.setPrefSize(240,240);
+        Addbtn.setContentDisplay(ContentDisplay.TOP);
+        Addbtn.setOnMouseClicked(this::onAddBtnClicked);
+        mainTilePane.getChildren().add(Addbtn);
+    }
+
+    private void onAddBtnClicked(MouseEvent mouseEvent) {
+        mainApplication.showCreationScene();
     }
 
 
@@ -139,11 +143,18 @@ public class MainController implements Initializable {
         }
     }
     public void onEditBtnClicked(ActionEvent actionEvent) {
-
+        if (SelectedButton != null){
+            for (Sequential seq :seqList) {
+                if (seq.getId().equals(SelectedButton.getUserData())){
+                    mainApplication.showEditionScene(seq);
+                    break;
+                }
+            }
+        }
     }
 
     public void onCreateBtnClicked(ActionEvent actionEvent) {
-        mainApplication.showSecondScene();
+        mainApplication.showCreationScene();
     }
 
 

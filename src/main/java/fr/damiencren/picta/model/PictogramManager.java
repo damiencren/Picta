@@ -1,9 +1,10 @@
-package com.example.picta.model;
+package fr.damiencren.picta.model;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -11,9 +12,15 @@ public class PictogramManager {
     static final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    public static ArrayList<Pictogram> getAllPictograms() throws IOException {
-        URL url = new URL("https://api.arasaac.org/api/pictograms/all/fr");
-        JsonNode jsonNode = objectMapper.readTree(url);
+    public static ArrayList<Pictogram> getAllPictograms() {
+        URL url = null;
+        JsonNode jsonNode = null;
+        try {
+            url = new URL("https://api.arasaac.org/api/pictograms/all/fr");
+            jsonNode = objectMapper.readTree(url);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         ArrayList<Pictogram> pictograms = new ArrayList<>();
         for (JsonNode node : jsonNode) {
             String id = node.get("_id").asText();
