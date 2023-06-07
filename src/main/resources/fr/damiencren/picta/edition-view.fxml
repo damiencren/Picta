@@ -2,22 +2,41 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.damiencren.picta.controller.EditionController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.damiencren.picta.controller.EditionController">
+   <top>
+      <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="1280.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <Label fx:id="lbSeqName" prefHeight="18.0" prefWidth="41.0" text="Name" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbSeqDes" text="Description" />
+         </children>
+      </HBox>
+   </top>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane fitToWidth="true" prefHeight="209.0" prefWidth="600.0">
+            <ScrollPane fitToWidth="true" prefHeight="410.0" prefWidth="1010.0">
                <content>
-                  <TilePane fx:id="seqTilePane" hgap="10.0" prefHeight="283.0" prefWidth="586.0" vgap="10.0">
+                  <TilePane fx:id="seqTilePane" hgap="10.0" prefHeight="378.0" prefWidth="1009.0" vgap="10.0">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
@@ -27,14 +46,17 @@
             <HBox prefHeight="26.0" prefWidth="546.0" spacing="10.0">
                <children>
                   <TextField fx:id="searchTextField" prefHeight="26.0" prefWidth="291.0" promptText="Rechercher un séquentiel" />
-                  <TextField fx:id="limitTextField" prefHeight="26.0" prefWidth="74.0" />
+                  <TextField fx:id="limitTextField" prefHeight="26.0" prefWidth="74.0" promptText="Taille" />
                   <Button mnemonicParsing="false" onAction="#onSearchByNameBtnClicked" text="Par nom" />
-                  <Button mnemonicParsing="false" text="Button" />
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Catégorie" />
                </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
             </HBox>
-            <ScrollPane fitToHeight="true" prefHeight="200.0" prefWidth="600.0">
+            <ScrollPane fitToHeight="true" prefHeight="254.0" prefWidth="1010.0">
                <content>
-                  <TilePane fx:id="resultTilePane" hgap="10.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="599.0" vgap="10.0">
+                  <TilePane fx:id="resultTilePane" alignment="CENTER_LEFT" hgap="10.0" orientation="VERTICAL" prefHeight="192.0" prefWidth="952.0" vgap="10.0">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
@@ -44,17 +66,59 @@
          </children>
       </VBox>
    </center>
-   <top>
-      <HBox prefHeight="43.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
+   <right>
+      <VBox prefHeight="634.0" prefWidth="269.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Button" />
-            <Pane prefHeight="200.0" prefWidth="200.0" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
+            <Label text="Séquentiel">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label text="Nom" />
+            <HBox prefHeight="1.0" prefWidth="250.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="tfName" promptText="Nom du séquentiel" />
+                  <Button mnemonicParsing="false" onAction="#onModifyNameBtnClicked" text="🖌" />
+               </children>
+            </HBox>
+            <Label text="Description" />
+            <HBox prefHeight="15.0" prefWidth="250.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="tfDescription" promptText="Description du séquentiel" />
+                  <Button mnemonicParsing="false" onAction="#onModifyDescriptionBtnClicked" text="🖌" />
+               </children>
+            </HBox>
+            <Label text="Couleur" />
+            <ColorPicker fx:id="seqColorPicker" />
+            <Separator prefWidth="200.0" />
+            <VBox prefHeight="122.0" prefWidth="250.0" spacing="5.0">
+               <children>
+                  <Label text="Pictogramme">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbIdPicto" text="Id : " />
+                  <Hyperlink fx:id="hyperlinkPicto" text="Image Link" />
+                  <Button mnemonicParsing="false" onAction="#pictoDelBtnClcked" text="Supprimer" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </right>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" prefHeight="57.0" prefWidth="1280.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lbError" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="655.0" text="Label" textFill="RED" visible="false" />
+            <Button mnemonicParsing="false" onAction="#saveBtnClicked" text="Enregistrer" />
+            <Button mnemonicParsing="false" onAction="#leaveBtnClicked" text="Quitter" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-   </top>
+   </bottom>
 </BorderPane>

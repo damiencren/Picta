@@ -1,8 +1,8 @@
 package fr.damiencren.picta.model;
 
 public class Pictogram implements java.io.Serializable{
-    public String id;
-    public String url;
+    private String id;
+    private String url;
 
     public Pictogram(String id, String url) {
         this.id = id;
