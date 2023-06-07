@@ -6,9 +6,7 @@ import fr.damiencren.picta.model.Sequential;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.image.Image;
@@ -16,11 +14,11 @@ import javafx.scene.image.ImageView;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.UUID;
+import java.util.*;
 
 public class MainController implements Initializable {
+    @FXML
+    private Label errorLabel;
     private Button SelectedButton = null;
     private ArrayList<Sequential> seqList = new ArrayList<>();
     private MainApplication mainApplication;
@@ -46,6 +44,7 @@ public class MainController implements Initializable {
         for (Sequential seq : seqList){
             Image image = new Image(new ByteArrayInputStream(seq.getImage()));
             ImageView view = new ImageView(image);
+            errorLabel.setVisible(false);
 
             view.setFitHeight(190);
             view.setPreserveRatio(true);
@@ -150,13 +149,47 @@ public class MainController implements Initializable {
                     break;
                 }
             }
+        } else {
+            errorLabel.setVisible(true);
         }
     }
+
+    @FXML
+    void quitApplication(ActionEvent event) {
+        Alert alertQuit = new Alert(Alert.AlertType.CONFIRMATION);
+        alertQuit.setTitle("Quitter");
+        alertQuit.setHeaderText("Voulez vous vraiment quitter Picta ?");
+
+        Optional<ButtonType> option = alertQuit.showAndWait();
+
+        if (option.isPresent() && option.get() == ButtonType.OK) {
+            System.exit(1);
+        }
+    }
+
 
     public void onCreateBtnClicked(ActionEvent actionEvent) {
         mainApplication.showCreationScene();
     }
 
+    @FXML
+    void createSequentialByFile(ActionEvent event) {
+        mainApplication.showCreationScene();
+    }
+
+    @FXML
+    void editSequentialByFile(ActionEvent event) {
+        if (SelectedButton != null){
+            for (Sequential seq :seqList) {
+                if (seq.getId().equals(SelectedButton.getUserData())){
+                    mainApplication.showEditionScene(seq);
+                    break;
+                }
+            }
+        } else {
+            errorLabel.setVisible(true);
+        }
+    }
 
 
 }
