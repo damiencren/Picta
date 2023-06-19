@@ -1,4 +1,4 @@
-package fr.damiencren.picta.utils;
+package fr.iclipse.picta.utils;
 
 public class NumberUtils {
 

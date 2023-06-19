@@ -1,8 +1,7 @@
-package fr.damiencren.picta.model;
+package fr.iclipse.picta.model;
 
 public class Pictogram implements java.io.Serializable{
-    private String id;
-    private String url;
+    private final String id, url;
 
     public Pictogram(String id, String url) {
         this.id = id;
@@ -10,18 +9,18 @@ public class Pictogram implements java.io.Serializable{
     }
 
     public String getID() {
-        return id;
+        return this.id;
     }
 
     public String getUrl() {
-        return url;
+        return this.url;
     }
 
     @Override
     public String toString() {
         return "Pictogram{" +
-                "id=" + id +
-                ", url='" + url +
+                "id=" + this.id +
+                ", url='" + this.url +
                 '}';
     }
 }

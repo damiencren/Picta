@@ -1,24 +1,20 @@
-package fr.damiencren.picta.model;
+package fr.iclipse.picta.model;
 
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 
-import javax.imageio.ImageIO;
-import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Sequential implements Serializable {
-    private UUID id;
+    private final UUID id;
     private String name;
     private String description;
-    private byte[] image;
+    private final byte[] image;
     private SerializableColor seriColor;
-    private ConcurrentLinkedQueue<Pictogram> pictoList;
+    private final ConcurrentLinkedQueue<Pictogram> pictoList;
 
     public Sequential(UUID id, String name, String des, byte[] image, SerializableColor seriColor){
         this.id = id;
@@ -30,39 +26,31 @@ public class Sequential implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
-    public void addPictogram(Pictogram picto){
-        pictoList.add(picto);
+    public void addPictogram(Pictogram pictogram){
+        this.pictoList.add(pictogram);
     }
 
     public ConcurrentLinkedQueue<Pictogram> getPictoList(){
-        return pictoList;
+        return this.pictoList;
     }
 
     public UUID getId() {
-        return id;
+        return this.id;
     }
 
     public byte[] getImage() {
-        return image;
+        return this.image;
     }
 
-    public byte[] getImage(byte[] image) {
-        return image;
-    }
-
-    public void delWithId(String id){
-        for (Pictogram picto : pictoList){
-            if (picto.getID().equals(id)){
-                pictoList.remove(picto);
-            }
-        }
+    public void removeById(String id){
+        this.pictoList.removeIf(pictogram -> pictogram.getID().equals(id));
     }
 
     public void setName(String name) {
@@ -74,10 +62,22 @@ public class Sequential implements Serializable {
     }
 
     public void setColor(Color color){
-        seriColor = new SerializableColor(color);
+        this.seriColor = new SerializableColor(color);
     }
 
     public SerializableColor getColor() {
-        return seriColor;
+        return this.seriColor;
+    }
+
+    public void switchElements(int index1, int index2) {
+        Pictogram[] elements = new Pictogram[this.pictoList.size()];
+        this.pictoList.toArray(elements);
+
+        Pictogram temp = elements[index1];
+        elements[index1] = elements[index2];
+        elements[index2] = temp;
+
+        this.pictoList.clear();
+        Collections.addAll(this.pictoList, elements);
     }
 }

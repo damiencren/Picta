@@ -1,4 +1,4 @@
-package fr.damiencren.picta.model;
+package fr.iclipse.picta.model;
 
 import java.io.Serializable;
 import javafx.scene.paint.Color;
@@ -6,10 +6,8 @@ import javafx.scene.paint.Color;
 
 public class SerializableColor implements Serializable
 {
-    private double red;
-    private double green;
-    private double blue;
-    private double alpha;
+    private final double red, green, blue, alpha;
+
     public SerializableColor(Color color)
     {
         this.red = color.getRed();
@@ -24,8 +22,8 @@ public class SerializableColor implements Serializable
         this.blue = blue;
         this.alpha = alpha;
     }
-    public Color getFXColor()
+    public String getRGBA()
     {
-        return new Color(red, green, blue, alpha);
+       return String.format("rgba(%d, %d, %d, %d)", (int)red*255, (int)green*255, (int)blue*255, (int)alpha);
     }
 }

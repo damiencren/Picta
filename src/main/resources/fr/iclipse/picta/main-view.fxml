@@ -7,36 +7,15 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onClick" prefHeight="360.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.damiencren.picta.controller.MainController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onClick" prefHeight="360.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iclipse.picta.controller.MainController">
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="32.0" prefWidth="600.0">
-               <children>
-                  <TextField fx:id="mainSearchBar" maxWidth="321.0" prefHeight="26.0" prefWidth="321.0" promptText="Rechercher un séquentiel" HBox.hgrow="NEVER">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </TextField>
-                  <Button alignment="CENTER" maxWidth="150.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Filtrer" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
-            </HBox>
             <ScrollPane fitToWidth="true" maxHeight="2000.0" prefHeight="1000.0" prefWidth="640.0">
                <content>
                   <TilePane fx:id="mainTilePane" hgap="10.0" prefHeight="259.0" prefWidth="639.0" vgap="10.0">
@@ -65,7 +44,7 @@
    <bottom>
       <HBox alignment="CENTER_RIGHT" prefHeight="46.0" prefWidth="640.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="errorLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="18.0" prefWidth="307.0" text="Veuillez sélectionnez un séquentiel !" textFill="RED" />
+            <Label fx:id="errorLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="18.0" prefWidth="307.0" text="Veuillez sélectionnez un séquentiel !" textFill="RED" visible="false" />
             <Button alignment="CENTER" contentDisplay="CENTER" maxWidth="50.0" minWidth="48.0" mnemonicParsing="false" onAction="#onCreateBtnClicked" prefHeight="26.0" prefWidth="48.0" text="Créer" />
             <Button fx:id="editBtn" alignment="CENTER" contentDisplay="CENTER" minWidth="54.0" mnemonicParsing="false" onAction="#onEditBtnClicked" prefHeight="26.0" prefWidth="54.0" text="Editer" />
             <Button fx:id="duplicateBtn" alignment="CENTER" minWidth="74.0" mnemonicParsing="false" onAction="#onDuplicateBtnClicked" prefHeight="26.0" prefWidth="74.0" text="Dupliquer" />
